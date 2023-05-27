@@ -2,3 +2,6 @@ name: VersatileFramework
 version: '${version}'
 main: me.michal737.versatileframework.VersatileFramework
 api-version: 1.19
+commands:
+  vf:
+    description: The main VersatileFramework command
