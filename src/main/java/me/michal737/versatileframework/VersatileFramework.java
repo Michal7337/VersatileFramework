@@ -52,6 +52,9 @@ public final class VersatileFramework extends JavaPlugin {
     }
 
     private void setupFiles() throws IOException {
+
+        getDataFolder().mkdir();
+
         blockDataFile.createNewFile();
     }
 
