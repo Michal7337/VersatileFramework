@@ -1,5 +1,5 @@
 name: VersatileFramework
-version: '${version}'
+version: 'v1.0'
 main: me.michal737.versatileframework.VersatileFramework
 api-version: 1.19
 
