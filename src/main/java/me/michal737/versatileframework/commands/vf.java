@@ -6,6 +6,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,6 +21,12 @@ public class vf implements TabExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+
+        if (args.length == 0) {
+            if (sender instanceof Player) {
+                ((Player) sender).openInventory(new MainVfGUI().getInventory());
+            }else sender.sendRichMessage("<red>Specify an argument!</red>");
+        }
 
         switch (args[0]) {
             case "mining" -> mining(sender, command, label, args);
@@ -50,6 +57,8 @@ public class vf implements TabExecutor {
 
     private void mining(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args){
 
+
+
     }
 
     private void block(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args){
@@ -61,15 +70,6 @@ public class vf implements TabExecutor {
     }
 
     private void test(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args){
-
-        SimpleLocation location = new SimpleLocation(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), args[4]);
-
-        //BlockDataStorage.storeData(location.getBlock(), args[5], args[6]);
-
-        String value = BlockDataStorage.readData(location.getBlock(), args[5]);
-
-        if (value == null) {sender.sendPlainMessage("null"); return;}
-        sender.sendPlainMessage(value);
 
     }
 
