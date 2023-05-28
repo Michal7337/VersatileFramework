@@ -1,6 +1,9 @@
 package me.michal737.versatileframework;
 
 import me.michal737.versatileframework.commands.vf;
+import org.bukkit.Server;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -46,8 +49,8 @@ public final class VersatileFramework extends JavaPlugin {
 
     private void registerCommands(){
 
-        getCommand("vf").setExecutor(new vf());
-        getCommand("vf").setTabCompleter(new vf());
+        //getCommand("vf").setExecutor(new vf());
+        //getCommand("vf").setTabCompleter(new vf());
 
     }
 
