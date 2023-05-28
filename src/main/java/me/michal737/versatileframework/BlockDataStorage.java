@@ -23,6 +23,15 @@ public class BlockDataStorage {
 
         String location = SimpleLocation.fromBlock(block).toString();
 
+        if (blocks == null) {
+
+            blocks = new HashMap<>();
+            HashMap<String, String> newData = new HashMap<>();
+            newData.put(namespace, data);
+            blocks.put(location, newData);
+
+        }
+
         if (!blocks.containsKey(location)){
 
             HashMap<String, String> newData = new HashMap<>();
@@ -33,11 +42,25 @@ public class BlockDataStorage {
 
         }
 
-        HashMap<String, String> currentData = blocks.get(location);
-        currentData.put(namespace, data);
-        blocks.put(location, currentData);
+        HashMap<String, String> storedData = blocks.get(location);
+        storedData.put(namespace, data);
+        blocks.put(location, storedData);
 
         saveBlocks();
+
+    }
+
+    public static String readData(Block block, String namespace){
+
+        readBlocks();
+
+        if (blocks == null) return null;
+
+        HashMap<String, String> storedData = blocks.get(SimpleLocation.fromBlock(block).toString());
+
+        if (storedData == null) return null;
+
+        return storedData.get(namespace);
 
     }
 

@@ -49,8 +49,8 @@ public final class VersatileFramework extends JavaPlugin {
 
     private void registerCommands(){
 
-        //getCommand("vf").setExecutor(new vf());
-        //getCommand("vf").setTabCompleter(new vf());
+        getCommand("vf").setExecutor(new vf());
+        getCommand("vf").setTabCompleter(new vf());
 
     }
 

@@ -27,7 +27,7 @@ public class vf implements TabExecutor {
             case "help" -> help(sender, command, label, args);
             case "test" -> test(sender, command, label, args);
             default -> {
-                sender.sendMessage(MiniMessage.miniMessage().deserialize("<red>Not a valid argument!</red>"));
+                sender.sendRichMessage("<red>Not a valid argument!</red>");
             }
         }
 
@@ -64,7 +64,12 @@ public class vf implements TabExecutor {
 
         SimpleLocation location = new SimpleLocation(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), args[4]);
 
-        BlockDataStorage.storeData(location.getBlock(), args[5], args[6]);
+        //BlockDataStorage.storeData(location.getBlock(), args[5], args[6]);
+
+        String value = BlockDataStorage.readData(location.getBlock(), args[5]);
+
+        if (value == null) {sender.sendPlainMessage("null"); return;}
+        sender.sendPlainMessage(value);
 
     }
 
