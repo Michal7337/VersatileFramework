@@ -3,7 +3,9 @@ package me.michal737.versatileframework.commands;
 import me.michal737.versatileframework.VersatileFramework;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -32,6 +34,8 @@ public class MainVfGUI implements InventoryHolder {
 
     private void createGUI(){
 
+        MiniMessage miniMessage = MiniMessage.miniMessage();
+
         ItemStack[] items = new ItemStack[54];
 
         menuGlass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
@@ -42,32 +46,32 @@ public class MainVfGUI implements InventoryHolder {
 
         ItemStack helpIcon = new ItemStack(Material.BOOK);
         ItemMeta helpIconMeta = helpIcon.getItemMeta();
-        helpIconMeta.displayName(Component.text("Help", NamedTextColor.AQUA));
+        helpIconMeta.displayName(miniMessage.deserialize("<aqua>Help</aqua>"));
         helpIcon.setItemMeta(helpIconMeta);
 
         ItemStack settingsIcon = new ItemStack(Material.PAPER);
         ItemMeta settingsIconMeta = settingsIcon.getItemMeta();
-        settingsIconMeta.displayName(Component.text("Settings", NamedTextColor.GOLD));
+        settingsIconMeta.displayName(miniMessage.deserialize("<gold>Settings</gold>"));
         settingsIcon.setItemMeta(settingsIconMeta);
 
         ItemStack miningSystemIcon = new ItemStack(Material.DIAMOND_PICKAXE);
         ItemMeta miningSystemIconMeta = miningSystemIcon.getItemMeta();
-        miningSystemIconMeta.displayName(Component.text("Custom mining system", NamedTextColor.GREEN));
+        miningSystemIconMeta.displayName(miniMessage.deserialize("<green>Custom mining system</green>"));
         miningSystemIcon.setItemMeta(miningSystemIconMeta);
 
         ItemStack customItemsIcon = new ItemStack(Material.NETHERITE_SWORD);
         ItemMeta customItemsIconMeta = customItemsIcon.getItemMeta();
-        customItemsIconMeta.displayName(Component.text("Custom items", NamedTextColor.YELLOW));
+        customItemsIconMeta.displayName(miniMessage.deserialize("<yellow>Custom items<yellow>"));
         customItemsIcon.setItemMeta(customItemsIconMeta);
 
         ItemStack blockFeaturesIcon = new ItemStack(Material.GRASS_BLOCK);
         ItemMeta blockFeaturesIconMeta = blockFeaturesIcon.getItemMeta();
-        blockFeaturesIconMeta.displayName(Component.text("Block features", NamedTextColor.BLUE));
+        blockFeaturesIconMeta.displayName(miniMessage.deserialize("<blue>Block features</blue>"));
         blockFeaturesIcon.setItemMeta(blockFeaturesIconMeta);
 
         ItemStack otherIcon = new ItemStack(Material.TNT);
         ItemMeta otherIconMeta = otherIcon.getItemMeta();
-        otherIconMeta.displayName(Component.text("Other", NamedTextColor.RED));
+        otherIconMeta.displayName(miniMessage.deserialize("<red>Other</red>"));
         otherIcon.setItemMeta(otherIconMeta);
 
         items[10] = helpIcon;

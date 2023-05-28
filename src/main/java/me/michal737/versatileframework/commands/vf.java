@@ -26,6 +26,7 @@ public class vf implements TabExecutor {
             if (sender instanceof Player) {
                 ((Player) sender).openInventory(new MainVfGUI().getInventory());
             }else sender.sendRichMessage("<red>Specify an argument!</red>");
+            return true;
         }
 
         switch (args[0]) {
