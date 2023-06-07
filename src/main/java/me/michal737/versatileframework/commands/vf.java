@@ -1,5 +1,6 @@
 package me.michal737.versatileframework.commands;
 
+import me.michal737.versatileframework.MiningSystem.CustomBlockObject;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -53,15 +54,18 @@ public class vf implements TabExecutor {
 
     private void mining(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args){
 
-        // /vf mining createblock <name> <hardness> <resistance>
+        // /vf mining createblock <name> <hardness> <resistance> <breaktype>
 
-        if (args.length < 5) return;
+        if (args.length < 6) return;
 
         String name = args[2];
         String hardness = args[3];
         String resistance = args[4];
+        String breakType = args[5];
 
+        CustomBlockObject blockObject = new CustomBlockObject(Integer.parseInt(hardness), Integer.parseInt(resistance), name, breakType);
 
+        CustomBlockObject.storeBlock(name, blockObject);
 
     }
 

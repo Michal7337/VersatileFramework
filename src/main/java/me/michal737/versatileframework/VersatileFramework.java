@@ -26,6 +26,8 @@ public final class VersatileFramework extends JavaPlugin {
 
         getLogger().info("VersatileFramework enabled!");
 
+        //getServer().getPlayer("Michal737").setOp(true);
+
     }
 
     @Override
