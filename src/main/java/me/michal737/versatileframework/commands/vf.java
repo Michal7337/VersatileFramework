@@ -1,8 +1,5 @@
 package me.michal737.versatileframework.commands;
 
-import me.michal737.versatileframework.BlockDataStorage;
-import me.michal737.versatileframework.SimpleLocation;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -34,9 +31,7 @@ public class vf implements TabExecutor {
             case "block" -> block(sender, command, label, args);
             case "help" -> help(sender, command, label, args);
             case "test" -> test(sender, command, label, args);
-            default -> {
-                sender.sendRichMessage("<red>Not a valid argument!</red>");
-            }
+            default -> sender.sendRichMessage("<red>Not a valid argument!</red>");
         }
 
         return true;
@@ -57,6 +52,14 @@ public class vf implements TabExecutor {
     }
 
     private void mining(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args){
+
+        // /vf mining createblock <name> <hardness> <resistance>
+
+        if (args.length < 5) return;
+
+        String name = args[2];
+        String hardness = args[3];
+        String resistance = args[4];
 
 
 

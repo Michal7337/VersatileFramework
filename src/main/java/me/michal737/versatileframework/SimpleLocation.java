@@ -1,7 +1,6 @@
 package me.michal737.versatileframework;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;

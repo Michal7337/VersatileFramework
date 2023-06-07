@@ -1,9 +1,9 @@
 package me.michal737.versatileframework;
 
+import me.michal737.versatileframework.MiningSystem.MiningListeners;
+import me.michal737.versatileframework.commands.MainVfGUI;
 import me.michal737.versatileframework.commands.vf;
-import org.bukkit.Server;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandMap;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -45,6 +45,11 @@ public final class VersatileFramework extends JavaPlugin {
 
     private void registerListeners(){
 
+        PluginManager pluginManager = getServer().getPluginManager();
+
+        pluginManager.registerEvents(new MainVfGUI(), this);
+        pluginManager.registerEvents(new MiningListeners(), this);
+
     }
 
     private void registerCommands(){
@@ -59,6 +64,9 @@ public final class VersatileFramework extends JavaPlugin {
         getDataFolder().mkdir();
 
         blockDataFile.createNewFile();
+
+        new File(getDataFolder().getAbsolutePath() + "/blocks").mkdir();
+
     }
 
 }

@@ -5,9 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDamageAbortEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 
-import java.util.EventListener;
-
-public class MiningListeners implements EventListener, Listener {
+public class MiningListeners implements Listener {
 
     @EventHandler
     public void onBlockDamage(BlockDamageEvent event){
