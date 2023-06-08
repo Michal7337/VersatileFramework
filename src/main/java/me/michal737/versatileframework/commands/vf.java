@@ -8,7 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.apache.commons.io.FilenameUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,9 +45,44 @@ public class vf implements TabExecutor {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
         if (args.length == 1){
+
             ArrayList<String> completions = new ArrayList<>();
             StringUtil.copyPartialMatches(args[0], mainCommandArgs, completions);
             return completions;
+
+        }
+
+        if (args.length > 1){
+
+            if (args[0].equals("mining")){
+
+                if (args.length == 2) {
+
+                    ArrayList<String> completions = new ArrayList<>();
+                    ArrayList<String> arguments = new ArrayList<>(Arrays.asList("createblock", "deleteblock"));
+                    StringUtil.copyPartialMatches(args[1], arguments, completions);
+                    return completions;
+
+                }
+
+                if (args.length == 3) {
+
+                    if (args[1].equals("deleteblock")) {
+
+                        String[] files = CustomBlockObject.getBlocksFolder().list();
+                        if (files == null) files = new String[]{};
+                        ArrayList<String> completions = new ArrayList<>();
+                        ArrayList<String> arguments = new ArrayList<>();
+                        for (String filename : files) {arguments.add(FilenameUtils.removeExtension(filename));}
+                        StringUtil.copyPartialMatches(args[2], arguments, completions);
+                        return completions;
+
+                    }
+
+                }
+
+            }
+
         }
 
         return null;
@@ -56,16 +93,29 @@ public class vf implements TabExecutor {
 
         // /vf mining createblock <name> <hardness> <resistance> <breaktype>
 
-        if (args.length < 6) return;
+        if (args.length < 2) {sender.sendRichMessage("<red>Provide an argument!"); return;}
 
-        String name = args[2];
-        String hardness = args[3];
-        String resistance = args[4];
-        String breakType = args[5];
+        if (args[1].equals("createblock")) {
 
-        CustomBlockObject blockObject = new CustomBlockObject(Integer.parseInt(hardness), Integer.parseInt(resistance), name, breakType);
+            if (args.length < 6) {sender.sendRichMessage("<red>Specify more arguments!"); return;}
 
-        CustomBlockObject.storeBlock(name, blockObject);
+            String name = args[2];
+            String hardness = args[3];
+            String resistance = args[4];
+            String breakType = args[5];
+
+            CustomBlockObject blockObject = new CustomBlockObject(name, Integer.parseInt(hardness), Integer.parseInt(resistance), breakType);
+            CustomBlockObject.storeBlock(name, blockObject);
+
+        }else if (args[1].equals("deleteblock")){
+
+            if (args.length < 3) return;
+            String name = args[2];
+            File file = CustomBlockObject.getBlockFile(name);
+            if (!file.exists()) {sender.sendRichMessage("<red>That block doesn't exist!"); return;}
+            file.delete();
+
+        }else {sender.sendRichMessage("<red>Not a valid argument!");}
 
     }
 
