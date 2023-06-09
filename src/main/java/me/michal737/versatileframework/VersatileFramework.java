@@ -1,8 +1,14 @@
 package me.michal737.versatileframework;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.ListenerPriority;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketEvent;
 import me.michal737.versatileframework.MiningSystem.MiningListeners;
 import me.michal737.versatileframework.commands.MainVfGUI;
 import me.michal737.versatileframework.commands.vf;
+import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 

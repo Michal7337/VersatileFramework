@@ -3,18 +3,19 @@ package me.michal737.versatileframework.MiningSystem;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.michal737.versatileframework.VersatileFramework;
+import org.apache.commons.io.FilenameUtils;
+import org.bukkit.Material;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class CustomBlockObject {
+public class CustomBlock {
 
     private int hardness, resistance;
-    private String name, breakType;
+    private String name, breakType, material;
 
-    public CustomBlockObject(String id, int hardness, int resistance, String breakType) {
+    public CustomBlock(String id, int hardness, int resistance, String breakType) {
         this.hardness = hardness;
         this.resistance = resistance;
         this.name = id;
@@ -29,12 +30,20 @@ public class CustomBlockObject {
         return resistance;
     }
 
-    public String getId() {
+    public String getName() {
         return name;
     }
 
     public String getBreakType() {
         return breakType;
+    }
+
+    public String getMaterialName(){
+        return material;
+    }
+
+    public Material getMaterial(){
+        return Material.getMaterial(material);
     }
 
     @Override
@@ -47,7 +56,7 @@ public class CustomBlockObject {
 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CustomBlockObject that = (CustomBlockObject) o;
+        CustomBlock that = (CustomBlock) o;
         return hardness == that.hardness && resistance == that.resistance && Objects.equals(name, that.name);
 
     }
@@ -57,9 +66,9 @@ public class CustomBlockObject {
         return Objects.hash(hardness, resistance, name);
     }
 
-    public static void storeBlock(String name, CustomBlockObject blockObject){
+    public static void storeBlock(String name, CustomBlock blockObject){
 
-        File blockFile = new File(new File(VersatileFramework.getInstance().getDataFolder().getAbsolutePath() + "/blocks/") + name + ".json");
+        File blockFile = getBlockFile(name);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         try {
@@ -78,7 +87,23 @@ public class CustomBlockObject {
     }
 
     public static File getBlocksFolder(){
-        return new File(VersatileFramework.getInstance().getDataFolder().getAbsolutePath() + "/blocks");
+        return new File(VersatileFramework.getInstance().getDataFolder().getAbsolutePath() + "/blocks/");
+    }
+
+    public static CustomBlock getCustomBlock(String name){
+        try {
+            return new Gson().fromJson(new FileReader(getBlockFile(name)), CustomBlock.class);
+        } catch (FileNotFoundException e) {throw new RuntimeException(e);}
+    }
+
+    public static ArrayList<String> getAllCustomBlocks(){
+
+        String[] files = CustomBlock.getBlocksFolder().list();
+        if (files == null) files = new String[]{};
+        ArrayList<String> names = new ArrayList<>();
+        for (String filename : files) {names.add(FilenameUtils.removeExtension(filename));}
+        return names;
+
     }
 
 }

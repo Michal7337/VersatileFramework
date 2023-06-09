@@ -19,11 +19,16 @@ repositories {
         name = "sonatype-oss-snapshots1"
         url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
     }
+    maven {
+        name = "ProtocolLib"
+        url = "https://repo.dmulloy2.net/repository/public/"
+    }
 }
 
 dependencies {
-    compileOnly "io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT", "commons-io:commons-io:2.12.0", "org.apache.commons:commons-configuration2:2.9.0"
-    implementation "net.kyori:adventure-text-minimessage:4.13.1"
+    compileOnly "io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT", "commons-io:commons-io:2.12.0", "org.apache.commons:commons-configuration2:2.9.0", "com.comphenix.protocol:ProtocolLib:4.8.0"
+    implementation "net.kyori:adventure-text-minimessage:4.13.1", 'cloud.commandframework:cloud-core:1.7.1', 'cloud.commandframework:cloud-bukkit:1.7.1', 'cloud.commandframework:cloud-paper:1.7.1'
+
 
 }
 
